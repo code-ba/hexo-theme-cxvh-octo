@@ -1,0 +1,74 @@
+<section class="<%=sectionClass%>">
+    <h1>GitHub 仓库</h1>
+    <ul id="gh_repos">
+        <li class="loading">Status updating&#8230;</li>
+    </ul>
+
+    <a href="https://github.com/<%=theme.sidebars.github%>">@<%=theme.sidebars.github%></a> on GitHub
+
+    <script>
+        $(document).ready(function () {
+            const options = {
+                user: '<%=theme.sidebars.github%>',
+                count: 0,
+                skip_forks: true,
+                target: '#gh_repos'
+            }
+
+            function escapeHtml(str) {
+                return $('<div/>').text(str).html();
+            }
+
+            function render(target, repos) {
+                let i, fragment = '', t = $(target)[0];
+
+                for (i = 0; i < repos.length; i++) {
+                    fragment += '<li><a href="' + repos[i].html_url + '">' + repos[i].name + '</a><p>' + escapeHtml(repos[i].description || '') + '</p></li>';
+                }
+                t.innerHTML = fragment;
+            }
+            if (location.hostname !== "localhost") {
+                $.ajax({
+                    url: "https://api.github.com/users/" + options.user + "/repos?sort=pushed&callback=?",
+                    dataType: 'jsonp',
+                    error: function (err) {
+                        $(options.target + ' li.loading').addClass('error').text("Error loading feed");
+                    },
+                    success: function (data) {
+                        var repos = [];
+                        if (!data || !data.data) { return; }
+                        for (var i = 0; i < data.data.length; i++) {
+                            if (options.skip_forks && data.data[i].fork) { continue; }
+                            repos.push(data.data[i]);
+                        }
+                        if (options.count) { repos.splice(options.count); }
+                        render(options.target, repos);
+                    }
+                });
+            }
+        });
+    </script>
+</section>
+<section class="<%=sectionClass%>">
+    <h1>友情链接</h1>
+    <ul id="links" class="links">
+        <% var links=JSON.parse(JSON.stringify(theme.links)).sort(function () { return parseInt(Math.random() * 10) % 2
+            ? 1 : -1 }).sort(function () { return parseInt(Math.random() * 10)>= 5 ? 1 : -1
+            }).sort(function () {
+            return parseInt(Math.random() * 10) < 5 ? 1 : -1 }) %>
+                <% links.forEach(function(item) { %>
+                    <li class="link">
+                        <img src="<%=item.avatar||theme.links.default.avatar%>">
+                        <a href="<%=item.url%>" title="<%=item.title%>">
+                            <%=item.title%>
+                        </a>
+                        <p title="<%=item.desc||theme.links.default.desc%>">
+                            <%=item.desc||theme.links.default.desc%>
+                        </p>
+                    </li>
+                    <% }); %>
+                        <li class="applylink">
+                            <a href="http://wpa.qq.com/msgrd?v=3&uin=630749264&site=qq&menu=yes">申请友链🤝🤝🤝</a>
+                        </li>
+    </ul>
+</section>

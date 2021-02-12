@@ -1,0 +1,99 @@
+<div>
+    <% site.tags.forEach(function(tag){ if(tag.length){ %>
+        <article role="article">
+            <header>
+                <h1 class="entry-title" id="tag-<%=encodeURIComponent(tag.name)%>">
+                    <%=tag.name%>
+                </h1>
+            </header>
+            <% const sorted=tag.posts.data.sort((a, b)=> {
+                return b.date.unix() - a.date.unix();
+                });
+
+                const postViews = sorted.reduce((acc, model)=> {
+                const entry = Object.assign(model, {
+                // only show year if this is first entry in list with that yearstamp
+                displayYear : !acc.find(_ => _.date.year() === model.date.year()),
+                title: model.title || 'Untitled',
+                monthText: theme.lang.month[model.date.format('MMM')],
+                dayText: model.date.format('DD'),
+                yearText: model.date.format('YYYY'),
+                datetime: date_xml(model.date),
+                target: model.link ? '_blank': '',
+                url: url_for(model.path).split('index.html')[0]
+                });
+                acc.push(entry);
+                return acc;
+                }, []);
+                %>
+                <% postViews.forEach(function(p){ %>
+
+                    <div id="blog-archives" class="category">
+
+                        <% if (p.displayYear) { %>
+                            <h2>
+                                <%=p.yearText%>
+                            </h2>
+                            <% } %>
+                                <article>
+                                    <h1>
+                                        <a href="<%=p.url%>" target="<%=p.target%>">
+                                            <%=p.title%>
+                                        </a>
+                                    </h1>
+                                    <time datetime="<%=p.datetime%>">
+                                        <span class="month">
+                                            <%=p.monthText%>
+                                        </span>
+                                        <span class="day">
+                                            <%=p.dayText%>日
+                                        </span>
+                                        <span class="year">
+                                            <%=p.year%>
+                                        </span>
+                                    </time>
+                                    <footer>
+                                        <% if (p.tags && p.tags.length){ %>
+                                            <span class="categories">
+                                                posted in
+                                                <% p.tags.forEach((tag, i)=> { %>
+                                                    <a class="category" href="<%=url_for(tag.path)%>">
+                                                        <%=tag.name%>
+                                                    </a>
+                                                    <%= i+1 < p.tags.length ? ',' : '' %>
+                                                        <% }) %>
+                                            </span>
+                                            <% } %>
+                                    </footer>
+                                </article>
+
+                    </div>
+
+
+                    <% }) %>
+        </article>
+        <% } }) %>
+</div>
+<aside class="sidebar">
+    <% const sections=Object.keys(theme.sidebars).filter(key=> !!theme.sidebars[key]);
+        sections.forEach(function(key, index) {
+        const sectionClass = (index % 2 == 0) ? 'odd' : 'even'; // remember that 'odd' starts from index=0
+        const type = key.toLowerCase();
+        if (type == 'recent') {
+        %>
+        <section class="<%=sectionClass%>">
+            <h1>标签</h1>
+            <div class="post-list-tags">
+                <% site.tags.forEach(function(tag){ if(tag.name!=="featured" ){ %>
+                    <a class="post-list-tags-item" href="#tag-<%=encodeURIComponent(tag.name)%>">
+                        <%=tag.name%>
+                    </a>
+                    <% } }) %>
+            </div>
+        </section>
+        <% } else if (type=='github' ) { %>
+            <%- partial('partials/sidebar-github', {sectionClass}) %>
+                <% } else if (type=='featured' ) { %>
+                    <%- partial('partials/sidebar-featured', {sectionClass}) %>
+                        <% } }); %>
+</aside>

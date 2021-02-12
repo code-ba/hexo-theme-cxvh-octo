@@ -1,0 +1,15 @@
+<div id="tag">
+    <% 
+        if(page.tag){
+    %> 
+        <%- partial('partials/post-list', {listTitle: `标签: ${page.tag}`, listPosts: page.posts}) %>
+    <%
+        }else{
+    %>
+            <%- partial('tags') %>
+    <%
+        }
+    %>
+</div>
+
+<%-partial('partials/sidebar')%>

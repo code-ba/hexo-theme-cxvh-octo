@@ -1,0 +1,10 @@
+<header role="banner">
+    <hgroup>
+        <h1><a href="<%- url_for() %>" data-text="<%= config.title %>">
+                <%= config.title %>
+            </a></h1>
+        <% if (theme.subtitle){ %>
+            <h2 title="<%= theme.subtitle %>"></h2>
+            <% } %>
+    </hgroup>
+</header>

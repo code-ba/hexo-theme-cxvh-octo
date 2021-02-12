@@ -1,0 +1,198 @@
+<% var pageTitle=page.title || config.title || '' ; if (is_archive()) pageTitle='Archives' ; if (is_tag())
+    pageTitle='Tag: ' + page.tag; if (is_category()) pageTitle='Category: ' + page.category; if (is_month()) pageTitle
+    +=': ' + page.month + '/' + page.year; if (is_year()) pageTitle +=': ' + page.year; var thisYear=new
+    Date().getFullYear(); %>
+
+    <!DOCTYPE html>
+    <!--[if IEMobile 7 ]><html class="no-js iem7" lang="<%=config.language%>"><![endif]-->
+    <!--[if lt IE 9]><html class="no-js lte-ie8" lang="<%=config.language%>"><![endif]-->
+    <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
+    <html class="no-js" lang="<%=config.language%>">
+    <!--<![endif]-->
+
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            <%= pageTitle %>
+        </title>
+
+        <meta name="author" content="<%= config.author %>">
+
+        <%- favicon_tag('/favicon.ico') %>
+
+            <meta name="HandheldFriendly" content="True">
+            <meta name="MobileOptimized" content="320">
+            <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+            <link rel="canonical" href="<%=config.url + '/' + page.canonical_path.replace('index.html', '')%>">
+
+            <% if (theme.atom) {%>
+                <link rel="alternate" href="<%=url_for('/atom.xml')%>" type="application/atom+xml">
+                <% } %>
+
+                    <% if (theme.googleAnalytics) { %>
+                        <!-- Global site tag (gtag.js) - Google Analytics -->
+                        <script async
+                            src="https://www.googletagmanager.com/gtag/js?id=UA-<%=theme.googleAnalytics%>"></script>
+                        <script>
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag() { dataLayer.push(arguments); }
+                            gtag('js', new Date());
+
+                            gtag('config', 'UA-<%=theme.googleAnalytics%>');
+                        </script>
+                        <% } %>
+
+                            <%- js('js/modernizr-2.0') %>
+
+                                <%- js('js/jquery-2.2.0.min') %>
+                                    <script src="https://cdn.cxvh.com/script/js/typed.min.js"></script>
+
+                                    <%- partial('partials/social-scripts') %>
+
+
+                                        <%- css('css/octo') %>
+
+                                            <link
+                                                href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+                                                rel="stylesheet" type="text/css">
+
+                                            <link
+                                                href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+                                                rel="stylesheet" type="text/css">
+
+                                            <% if (theme.stylesheets && theme.stylesheets.length) { %>
+                                                <!-- stylesheets list from config.yml -->
+                                                <% theme.stylesheets.forEach(function(url) { %>
+                                                    <link rel="stylesheet" href="<%= url %>">
+                                                    <% }); %>
+                                                        <% } %>
+                                                            <script>
+                                                                var _hmt = _hmt || [];
+                                                                (function () {
+                                                                    var hm = document.createElement("script");
+                                                                    hm.src = "https://hm.baidu.com/hm.js?5b59e0166baa8ced0505ce9e1a9f4890";
+                                                                    var s = document.getElementsByTagName("script")[0];
+                                                                    s.parentNode.insertBefore(hm, s);
+                                                                })();
+                                                            </script>
+                                                            <script async
+                                                                src="https://www.googletagmanager.com/gtag/js?id=G-YBTMS716H5"></script>
+                                                            <script>
+                                                                window.dataLayer = window.dataLayer || [];
+                                                                function gtag() { dataLayer.push(arguments); }
+                                                                gtag('js', new Date());
+
+                                                                gtag('config', 'G-YBTMS716H5');
+                                                            </script>
+                                                            <base target="_black" />
+
+    </head>
+
+    <body>
+
+        <%- partial('partials/header') %>
+
+            <%- partial('partials/navigation') %>
+
+                <div id="main">
+                    <div id="content">
+                        <%- body %>
+                    </div>
+
+                    <div id="fishContainer"></div>
+                    <span class="dot-one"></span>
+                    <span class="dot-two"></span>
+                    <span class="dot-three"></span>
+                </div>
+                <div class="lantern-one">
+                    <div class="lantern">
+                        <div class="line"></div>
+                        <div class="lantern-a">
+                            <div class="lantern-b"><div class="lantern-t">新春</div></div>
+                        </div>
+                        <div class="water water-a"><div class="water-c"></div><div class="water-b"></div></div>
+                    </div>
+                </div>
+                <div class="lantern-two">
+                    <div class="lantern">
+                        <div class="line"></div>
+                        <div class="lantern-a">
+                            <div class="lantern-b"><div class="lantern-t">快乐</div></div>
+                        </div>
+                        <div class="water water-a"><div class="water-c"></div><div class="water-b"></div></div>
+                    </div>
+                </div>
+                <footer role="contentinfo">
+                    <p>
+                        Copyright © 2020 - <%= thisYear %>
+                            <%= config.author %> -
+                                <span class="credit">
+                                    <a href="http://beian.miit.gov.cn">陕ICP备2020016132号-1</a>&nbsp;
+                                    <a target="_blank"
+                                        href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=61011302001121"><img
+                                            src="/images/icon/beian.gov.png" /><span style="padding-left: 5px;">陕公网安备
+                                            61011302001121号</span></a>&nbsp;
+                                    UV: <span id="busuanzi_value_site_uv"></span>&nbsp;
+                                    PV: <span id="busuanzi_value_site_pv"></span>&nbsp;
+                                    IP:<span id="userIp">loading...</span>&nbsp;
+                                    💖已运行:<span id="runtime"></span>
+                                </span>
+                    </p>
+                </footer>
+
+                <% if (theme.scripts && theme.scripts.length) { %>
+                    <!-- scripts list from theme config.yml -->
+                    <% theme.scripts.forEach(function(url) { %>
+                        <script src="<%= url %>"></script>
+                        <% }); %>
+                            <% } %>
+
+                                <script>!function (e) { function r(r) { for (var n, i, l = r[0], f = r[1], a = r[2], c = 0, s = []; c < l.length; c++)i = l[c], Object.prototype.hasOwnProperty.call(o, i) && o[i] && s.push(o[i][0]), o[i] = 0; for (n in f) Object.prototype.hasOwnProperty.call(f, n) && (e[n] = f[n]); for (p && p(r); s.length;)s.shift()(); return u.push.apply(u, a || []), t() } function t() { for (var e, r = 0; r < u.length; r++) { for (var t = u[r], n = !0, l = 1; l < t.length; l++) { var f = t[l]; 0 !== o[f] && (n = !1) } n && (u.splice(r--, 1), e = i(i.s = t[0])) } return e } var n = {}, o = { 1: 0 }, u = []; function i(r) { if (n[r]) return n[r].exports; var t = n[r] = { i: r, l: !1, exports: {} }; return e[r].call(t.exports, t, t.exports, i), t.l = !0, t.exports } i.m = e, i.c = n, i.d = function (e, r, t) { i.o(e, r) || Object.defineProperty(e, r, { enumerable: !0, get: t }) }, i.r = function (e) { "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(e, Symbol.toStringTag, { value: "Module" }), Object.defineProperty(e, "__esModule", { value: !0 }) }, i.t = function (e, r) { if (1 & r && (e = i(e)), 8 & r) return e; if (4 & r && "object" == typeof e && e && e.__esModule) return e; var t = Object.create(null); if (i.r(t), Object.defineProperty(t, "default", { enumerable: !0, value: e }), 2 & r && "string" != typeof e) for (var n in e) i.d(t, n, function (r) { return e[r] }.bind(null, n)); return t }, i.n = function (e) { var r = e && e.__esModule ? function () { return e.default } : function () { return e }; return i.d(r, "a", r), r }, i.o = function (e, r) { return Object.prototype.hasOwnProperty.call(e, r) }, i.p = "/"; var l = this.webpackJsonpgrid = this.webpackJsonpgrid || [], f = l.push.bind(l); l.push = r, l = l.slice(); for (var a = 0; a < l.length; a++)r(l[a]); var p = f; t() }([])</script>
+
+
+                                <script src="https://cdn.cxvh.com/script/js/fish.min.js"></script>
+
+
+                                <%- js('live2dw/lib/L2Dwidget.min') %>
+                                    <!-- <%- css('aplayer/APlayer.min') %> -->
+                                    <!-- <div id="aplayer"></div> -->
+                                    <!-- <%- js('aplayer/APlayer.min') %> -->
+                                    <link rel="stylesheet" href="https://cdn.cxvh.com/script/viewer/viewer.min.css">
+                                    <script src="https://cdn.cxvh.com/script/viewer/viewer.min.js"></script>
+                                    <script
+                                        src="https://cdn.cxvh.com/script/jquery-viewer/jquery-viewer.min.js"></script>
+                                    <script src="//y.gtimg.cn/music/h5/player/player.js?max_age=2592000"></script>
+                                    <div class="music-player" style="display: none;" id="musicPlayer">
+                                        <div class="circle">
+                                            <div class="img" id="circleImg"></div>
+                                        </div>
+                                        <div class="btn-box">
+                                            <div class="btn play" music-play>
+                                                <svg class="play" viewBox="0 0 64 64">
+                                                    <path
+                                                        d="M51.109 30.335l-36-24A2 2 0 0 0 12 8v48a2.003 2.003 0 0 0 2 2c.388 0 .775-.113 1.109-.336l36-24a2 2 0 0 0 0-3.329z" />
+                                                </svg>
+                                                <svg class="pause" viewBox="0 0 100 100">
+                                                    <path
+                                                        d="M22.537 8.046h17.791c1.104 0 2.003.898 2.003 1.993v79.912a2.005 2.005 0 0 1-2.003 2.003h-17.79a2.005 2.005 0 0 1-2.003-2.003V10.04c0-1.095.898-1.993 2.002-1.993zM59.672 8.046h17.8c1.095 0 1.993.898 1.993 1.993v79.912a2.003 2.003 0 0 1-1.993 2.003h-17.8a1.997 1.997 0 0 1-1.993-2.003V10.04c0-1.095.889-1.993 1.993-1.993z" />
+                                                </svg>
+                                            </div>
+                                            <div class="btn next" music-next><svg viewBox="0 0 100 100">
+                                                    <path d="M26.695 34.434v31.132L54.5 49.998z" />
+                                                    <path
+                                                        d="M24.07 34.434v31.132c0 2.018 2.222 3.234 3.95 2.267l27.804-15.568c1.706-.955 1.707-3.578 0-4.533L28.02 32.168c-2.957-1.655-5.604 2.88-2.649 4.533l27.805 15.564v-4.533L25.371 63.3l3.95 2.267V34.435c-.001-3.387-5.251-3.387-5.251-.001z" />
+                                                    <g>
+                                                        <path d="M55.5 34.434v31.132l27.805-15.568z" />
+                                                        <path
+                                                            d="M52.875 34.434v31.132c0 2.018 2.222 3.234 3.949 2.267 9.27-5.189 18.537-10.379 27.805-15.568 1.705-.955 1.705-3.578 0-4.533L56.824 32.168c-2.957-1.655-5.604 2.88-2.648 4.533l27.803 15.564v-4.533L54.176 63.3l3.949 2.267V34.435c0-3.387-5.25-3.387-5.25-.001z" />
+                                                    </g>
+                                                </svg></div>
+                                        </div>
+                                    </div>
+                                    <%- js('js/octo') %>
+                                        <script async
+                                            src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    </body>
+
+    </html>

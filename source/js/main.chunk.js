@@ -1,0 +1,2 @@
+(this.webpackJsonpgrid=this.webpackJsonpgrid||[]).push([[0],{5:function(e,t,r){"use strict";r.r(t);var d=r(1),n=r(0),c=r.n(n),i=r(3),a=r.n(i),s=r(4);a.a.render(Object(d.jsx)(c.a.StrictMode,{children:Object(d.jsx)(s.a,{})}),document.getElementById("gridHeader")),a.a.render(Object(d.jsx)(c.a.StrictMode,{children:Object(d.jsx)(s.a,{})}),document.getElementById("gridMain"))}},[[5,1,2]]]);
+//# sourceMappingURL=main.f563b84c.chunk.js.map

@@ -1,0 +1,73 @@
+# Page language (html attribute)
+language: zh-CN
+lang: 
+  month:
+    Jan: 一月
+    Feb: 二月
+    Mar: 三月
+    Apr: 四月
+    May: 五月
+    Jun: 六月
+    Jul: 七月
+    Aug: 八月
+    Sep: 九月
+    Oct: 十月
+    Nov: 十一月
+    Dec: 十二月
+
+
+# Main menu navigation items
+menu:
+  首页: /
+  归档: /archives
+  标签: /tags
+  分类: /categories
+  # Title: /pageName - create using `hexo new page 'pageName'`
+
+# Post social sharing features
+social:
+  twitter: your_twitter # set to your twitter handle
+
+# Page sidebars
+# Components will appear in the order they are specified
+sidebars:
+  recent: true # boolean to display 10 most recent posts
+  featured: true # boolean to list all posts with tag 'featured'
+  github: cxvh # string to point to a Github profile | false to disable
+
+# Disqus comments
+disqus:
+  enabled: false
+  shortname: your_website_shortname
+
+# Analytics
+googleAnalytics: false # false | string (UA-xxxx-x ID)
+
+# Link to atom.xml in nav bar?
+# You can use https://github.com/hexojs/hexo-generator-feed to generate these
+atom: true
+
+# Stylesheets loaded in the <head>
+stylesheets:
+
+# Scripts loaded at the end of the body
+scripts:
+
+links:
+  -
+    title: 麋鹿鲁哟
+    avatar: https://miluluyo.github.io/vdoingBlog/img/tx.jpg
+    url: https://www.cnblogs.com/miluluyo/
+    desc: 大道至简，知易行难。
+  -
+    title: Loneliness
+    avatar: https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/avat.jpg
+    url: https://www.dingshiyi.top"
+    desc: 万水千山，你愿意陪我一起看吗
+  -
+    title: 慧眼博客
+    avatar: https://image.theeye.tech/img/15873849679911587384967991mmexport1569296865219---xinsiraa.png
+    url: https://theeye.tech/
+    desc: xinsir的个人博客
+
+subtitle: Eternity is not adistance but adecision.
